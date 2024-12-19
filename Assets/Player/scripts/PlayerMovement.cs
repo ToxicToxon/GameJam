@@ -2,6 +2,7 @@ using Unity.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.LowLevel;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class PlayerMovement : MonoBehaviour
     private float toRight;
     private float sprint;
     private bool sprinting = false;
+    public Animator animator;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -31,40 +33,33 @@ public class PlayerMovement : MonoBehaviour
         playerCharacterController = gameObject.GetComponent<CharacterController>();
         sprintCurrentAmount = sprintCapacity;
         playerSpeed = initialSpeed;
+        animator = transform.GetChild(1).gameObject.GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        groundedPlayer = playerCharacterController.isGrounded;
-        if (groundedPlayer && playerVelocity.y < 0)
-        {
-            playerVelocity.y = 0f;
-        }
-        /*Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-        playerCharacterController.Move(move * Time.deltaTime * playerSpeed);
-
-        if (move != Vector3.zero)
-        {
-            gameObject.transform.forward = move;
-        }
-
-        // Makes the player jump
-        if (Input.GetButtonDown("Jump") && groundedPlayer)
-        {
-            playerVelocity.y += Mathf.Sqrt(jumpHeight * -2.0f * gravityValue);
-        }
-
-        playerVelocity.y += gravityValue * Time.deltaTime;
-        playerCharacterController.Move(playerVelocity * Time.deltaTime);*/
     }
     void FixedUpdate()
     {
-        playerSprint();
-        calculateVector();
-        if(movementVector != Vector3.zero)
+        if(globalVariable.gameState == 0)
         {
-            playerCharacterController.Move(movementVector);
+            groundedPlayer = playerCharacterController.isGrounded;
+            if (groundedPlayer && playerVelocity.y < 0)
+            {
+                playerVelocity.y = 0f;
+            }
+            playerSprint();
+            calculateVector();
+            movementVector.y += gravityValue * Time.deltaTime;
+            if(movementVector.x == 0 && movementVector.z == 0)
+                animator.SetBool("walk", false);
+            else
+                animator.SetBool("walk", true);
+            if(movementVector != Vector3.zero)
+            {
+                playerCharacterController.Move(movementVector);
+            }
         }
     }
     public Vector3 calculateVector()
@@ -136,17 +131,17 @@ public class PlayerMovement : MonoBehaviour
         if(sprint == 0)
         {
             sprinting = false;
-            Debug.Log(sprintCurrentAmount + "huh 2");
+            animator.SetBool("run", false);
         }
         else if(sprint == 1 && sprintCurrentAmount == 0)
         {
-            Debug.Log("huh 3");
             sprinting = false;
+            animator.SetBool("run", false);
         }
         else if(sprint == 1 && sprintCapacity == sprintCurrentAmount)
         {
-            Debug.Log("huh 4");
-            sprinting = true;  
+            sprinting = true;
+            animator.SetBool("run", true);
         }     
         changePlayerSpeed();    
     }
@@ -157,9 +152,9 @@ public class PlayerMovement : MonoBehaviour
             playerSpeed += playerSpeed;
         else if(sprinting && sprintCurrentAmount == 0)
         {
-            Debug.Log("huh 1");
             playerSpeed = initialSpeed;
             sprinting = false;
+            animator.SetBool("run", false);
         }
         if(sprinting)
         {
@@ -177,6 +172,8 @@ public class PlayerMovement : MonoBehaviour
 
     public void rotateCharacter(InputAction.CallbackContext ctx)
     {
+        if(globalVariable.gameState != 0)
+            return;
         Mathf.Clamp(ctx.ReadValue<Vector2>().y/cameraSensitivity, -90, 90);
         Vector3 rotation = new Vector3(0, ctx.ReadValue<Vector2>().x/cameraSensitivity, 0);
         Vector3 cameraRotation = new Vector3(-Mathf.Clamp(ctx.ReadValue<Vector2>().y/cameraSensitivity, -90, 90), ctx.ReadValue<Vector2>().x/cameraSensitivity , 0);
