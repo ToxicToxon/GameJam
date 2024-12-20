@@ -12,6 +12,7 @@ public class AITentakl : MonoBehaviour
     public AudioClip walkClip;
     public AudioClip screamClip;
     public GameObject playerAudioGO;
+    public GameObject monsters;
     private float originalLength;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -33,6 +34,7 @@ public class AITentakl : MonoBehaviour
             Vector3 lookAtPosition = transform.position;
             lookAtPosition.y = transform.GetChild(2).gameObject.transform.position.y;
             playerCameraObj.transform.LookAt(lookAtPosition);
+            monsterAnim.SetBool("jumpscare", true);
         }
         else
         {
@@ -55,7 +57,6 @@ public class AITentakl : MonoBehaviour
                 return;
             else
                 globalVariable.gameState = 1;
-            monsterAnim.SetBool("jumpscare", true);
             jumpscare();
             Debug.Log("test of trigger");
         }
@@ -63,7 +64,8 @@ public class AITentakl : MonoBehaviour
 
     public void jumpscare()
     {
-        gameObject.layer = 0;
+        for(int i = 0; i < monsters.transform.childCount; i++)
+            monsters.transform.GetChild(i).gameObject.transform.GetChild(0).gameObject.layer = 0;
         audioSource.Stop();
         playerAudioGO.GetComponent<PlayAudio>().jumpscare();
         Invoke("backToMenu", 2f);

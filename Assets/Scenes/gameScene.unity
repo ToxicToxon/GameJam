@@ -18339,7 +18339,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1075234022705950904, guid: c12f7a045dbd1694a9adeeae13faa7ca, type: 3}
       propertyPath: m_Name
-      value: monter (2)
+      value: monter2
       objectReference: {fileID: 0}
     - target: {fileID: 2631361369445594062, guid: c12f7a045dbd1694a9adeeae13faa7ca, type: 3}
       propertyPath: m_LocalPosition.x
@@ -18385,6 +18385,10 @@ PrefabInstance:
       propertyPath: rolloffMode
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9063110818012027952, guid: c12f7a045dbd1694a9adeeae13faa7ca, type: 3}
+      propertyPath: monsters
+      value: 
+      objectReference: {fileID: 933566338}
     - target: {fileID: 9063110818012027952, guid: c12f7a045dbd1694a9adeeae13faa7ca, type: 3}
       propertyPath: walkClip
       value: 
@@ -19172,7 +19176,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1075234022705950904, guid: c12f7a045dbd1694a9adeeae13faa7ca, type: 3}
       propertyPath: m_Name
-      value: monter
+      value: monter3
       objectReference: {fileID: 0}
     - target: {fileID: 2631361369445594062, guid: c12f7a045dbd1694a9adeeae13faa7ca, type: 3}
       propertyPath: m_LocalPosition.x
@@ -19218,6 +19222,10 @@ PrefabInstance:
       propertyPath: rolloffMode
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9063110818012027952, guid: c12f7a045dbd1694a9adeeae13faa7ca, type: 3}
+      propertyPath: monsters
+      value: 
+      objectReference: {fileID: 933566338}
     - target: {fileID: 9063110818012027952, guid: c12f7a045dbd1694a9adeeae13faa7ca, type: 3}
       propertyPath: walkClip
       value: 
@@ -19868,7 +19876,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1075234022705950904, guid: c12f7a045dbd1694a9adeeae13faa7ca, type: 3}
       propertyPath: m_Name
-      value: monter (1)
+      value: monter1
       objectReference: {fileID: 0}
     - target: {fileID: 2631361369445594062, guid: c12f7a045dbd1694a9adeeae13faa7ca, type: 3}
       propertyPath: m_LocalPosition.x
@@ -19914,6 +19922,10 @@ PrefabInstance:
       propertyPath: rolloffMode
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9063110818012027952, guid: c12f7a045dbd1694a9adeeae13faa7ca, type: 3}
+      propertyPath: monsters
+      value: 
+      objectReference: {fileID: 933566338}
     - target: {fileID: 9063110818012027952, guid: c12f7a045dbd1694a9adeeae13faa7ca, type: 3}
       propertyPath: walkClip
       value: 
@@ -21424,6 +21436,10 @@ PrefabInstance:
       propertyPath: shake
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 9063110818012027952, guid: c12f7a045dbd1694a9adeeae13faa7ca, type: 3}
+      propertyPath: monsters
+      value: 
+      objectReference: {fileID: 933566338}
     - target: {fileID: 9063110818012027952, guid: c12f7a045dbd1694a9adeeae13faa7ca, type: 3}
       propertyPath: walkClip
       value: 
@@ -39993,7 +40009,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4329825354665771197, guid: e53bebadb3107ef49bfeca6e3b722cbc, type: 3}
       propertyPath: m_CullingMask.m_Bits
-      value: 759
+      value: 631
       objectReference: {fileID: 0}
     - target: {fileID: 4341805412762791882, guid: e53bebadb3107ef49bfeca6e3b722cbc, type: 3}
       propertyPath: m_Layer
