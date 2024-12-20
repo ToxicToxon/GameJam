@@ -43,13 +43,13 @@ public class PlayerMovement : MonoBehaviour
         playerSpeed = initialSpeed;
         animator = transform.GetChild(1).gameObject.GetComponent<Animator>();
         Cursor.visible = false;
-        //Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //rotateCharacter();
+        rotateCharacter();
         staminaBar.value = sprintCurrentAmount;
     }
     void FixedUpdate()
@@ -182,7 +182,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    public void rotateCharacter(InputAction.CallbackContext ctx)
+    public void rotateCharacter()
     {
         if(globalVariable.gameState != 0)
             return;

@@ -75,6 +75,7 @@ public class AITentakl : MonoBehaviour
     {
         SceneManager.LoadScene("mainMenu", LoadSceneMode.Single);
         Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     public void scream()

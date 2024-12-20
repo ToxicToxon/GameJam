@@ -13,5 +13,6 @@ public class winZoneScript : MonoBehaviour
     {
         SceneManager.LoadScene("mainMenu", LoadSceneMode.Single);
         Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 }
