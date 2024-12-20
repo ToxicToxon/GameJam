@@ -12,7 +12,7 @@ public class PlayerMovement : MonoBehaviour
     private bool groundedPlayer;
     public float initialSpeed = 10.0f;
     private float playerSpeed = 10.0f;
-    public float cameraSensitivity = 5.0f;
+    public float cameraSensitivity = 15.0f;
     private float gravityValue = -9.81f;
     private Vector3 movementVector = Vector3.zero;
     public Camera mainCamera;
@@ -29,6 +29,9 @@ public class PlayerMovement : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip jumpscareClip;
 
+    float rotationX;
+    float rotationY;
+
     // UI
     public Slider staminaBar;
 
@@ -39,11 +42,14 @@ public class PlayerMovement : MonoBehaviour
         sprintCurrentAmount = sprintCapacity;
         playerSpeed = initialSpeed;
         animator = transform.GetChild(1).gameObject.GetComponent<Animator>();
+        Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
     }
 
     // Update is called once per frame
     void Update()
     {
+        //rotateCharacter();
         staminaBar.value = sprintCurrentAmount;
     }
     void FixedUpdate()
@@ -180,10 +186,18 @@ public class PlayerMovement : MonoBehaviour
     {
         if(globalVariable.gameState != 0)
             return;
-        Mathf.Clamp(ctx.ReadValue<Vector2>().y/cameraSensitivity, -90, 90);
+        /*Mathf.Clamp(ctx.ReadValue<Vector2>().y/cameraSensitivity, -90, 90);
         Vector3 rotation = new Vector3(0, ctx.ReadValue<Vector2>().x/cameraSensitivity, 0);
         Vector3 cameraRotation = new Vector3(-Mathf.Clamp(ctx.ReadValue<Vector2>().y/cameraSensitivity, -90, 90), ctx.ReadValue<Vector2>().x/cameraSensitivity , 0);
         gameObject.transform.rotation = Quaternion.Euler(rotation);
-        mainCamera.transform.rotation = Quaternion.Euler(cameraRotation);
+        mainCamera.transform.rotation = Quaternion.Euler(cameraRotation);*/
+        float mouseX = Input.GetAxisRaw("Mouse X") * Time.deltaTime * cameraSensitivity;
+        float mouseY = Input.GetAxisRaw("Mouse Y") * Time.deltaTime * cameraSensitivity;
+
+        rotationY += mouseX;
+        rotationX -= mouseY;
+        rotationX = Mathf.Clamp(rotationX, -90f, 90f);
+        transform.rotation = Quaternion.Euler(0, rotationY, 0);
+        mainCamera.transform.rotation = Quaternion.Euler(rotationX, rotationY, 0);
     }
 }

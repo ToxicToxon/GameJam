@@ -12,5 +12,6 @@ public class winZoneScript : MonoBehaviour
     public void backToMenu()
     {
         SceneManager.LoadScene("mainMenu", LoadSceneMode.Single);
+        Cursor.visible = true;
     }
 }
