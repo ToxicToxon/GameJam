@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.SceneManagement;
 
 public class AITentakl : MonoBehaviour
 {
@@ -56,5 +57,11 @@ public class AITentakl : MonoBehaviour
     public void jumpscare()
     {
         gameObject.layer = 0;
+        Invoke("backToMenu", 1.5f);
+    }
+
+    public void backToMenu()
+    {
+        SceneManager.LoadScene("mainMenu", LoadSceneMode.Single);
     }
 }
