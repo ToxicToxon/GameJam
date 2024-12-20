@@ -6,6 +6,8 @@ public class PlayerPickUpPages : MonoBehaviour
     public Camera mainCamera;
     private LayerMask layerMask;
     private GameObject lookedAt;
+    public AudioSource audioSource;
+    public AudioClip pickupPageClip;
     
     void Start()
     {
@@ -33,8 +35,16 @@ public class PlayerPickUpPages : MonoBehaviour
         if(lookedAt != null)
         {
             Destroy(lookedAt);
+            pickupPageClipPlay();
             lookedAt = null;
             globalVariable.currentPages++;
         }
     }
+
+    public void pickupPageClipPlay()
+    {
+        audioSource.clip = pickupPageClip;
+        audioSource.Play();
+    }
+
 }

@@ -25,6 +25,8 @@ public class PlayerMovement : MonoBehaviour
     private float sprint;
     private bool sprinting = false;
     public Animator animator;
+    public AudioSource audioSource;
+    public AudioClip jumpscareClip;
 
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

@@ -8,12 +8,19 @@ public class AITentakl : MonoBehaviour
     public NavMeshAgent monsterAI;
     private Animator monsterAnim;
     private GameObject playerCameraObj;
+    public AudioSource audioSource;
+    public AudioClip walkClip;
+    public AudioClip screamClip;
+    public GameObject playerAudioGO;
+    private float originalLength;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        audioSource = gameObject.GetComponent<AudioSource>();
         monsterAI = gameObject.GetComponent<NavMeshAgent>();
         monsterAnim = gameObject.GetComponent<Animator>();
         playerCameraObj = playerTransform.GetChild(0).gameObject;
+        originalLength = audioSource.maxDistance;
     }
 
     // Update is called once per frame
@@ -57,11 +64,29 @@ public class AITentakl : MonoBehaviour
     public void jumpscare()
     {
         gameObject.layer = 0;
-        Invoke("backToMenu", 1.5f);
+        audioSource.Stop();
+        playerAudioGO.GetComponent<PlayAudio>().jumpscare();
+        Invoke("backToMenu", 2f);
     }
 
     public void backToMenu()
     {
         SceneManager.LoadScene("mainMenu", LoadSceneMode.Single);
+    }
+
+    public void scream()
+    {
+        audioSource.clip = screamClip;
+        Vector3 length = transform.position - playerAudioGO.transform.position;
+        audioSource.maxDistance = length.magnitude;
+        audioSource.loop = false;
+        audioSource.Play();
+    }
+    public void walk()
+    {
+        audioSource.clip = walkClip;
+        audioSource.maxDistance = originalLength;
+        audioSource.loop = true;
+        audioSource.Play();
     }
 }
