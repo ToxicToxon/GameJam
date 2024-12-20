@@ -40175,6 +40175,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8655140068313120433, guid: e53bebadb3107ef49bfeca6e3b722cbc, type: 3}
+      propertyPath: cameraSensitivity
+      value: 40
+      objectReference: {fileID: 0}
     - target: {fileID: 8665240317660932258, guid: e53bebadb3107ef49bfeca6e3b722cbc, type: 3}
       propertyPath: m_Layer
       value: 6
