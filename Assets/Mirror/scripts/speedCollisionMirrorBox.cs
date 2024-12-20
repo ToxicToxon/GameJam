@@ -16,7 +16,7 @@ public class speedCollisionMirrorBox : MonoBehaviour
 
     public void OnTriggerExit()
     {
-        globalVariable.monsterSpeed = 10;
+        globalVariable.monsterSpeed = 5f;
         for(int i = 0; i < monsters.transform.childCount; i++)
         {
             GameObject monster = monsters.transform.GetChild(i).gameObject;

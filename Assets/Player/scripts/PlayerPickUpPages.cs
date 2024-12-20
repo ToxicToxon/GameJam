@@ -13,6 +13,7 @@ public class PlayerPickUpPages : MonoBehaviour
 
     public TMP_Text pageCountUI;
     public TMP_Text pagePickup;
+    public GameObject door;
     
     void Start()
     {
@@ -57,6 +58,10 @@ public class PlayerPickUpPages : MonoBehaviour
             pickupPageClipPlay();
             lookedAt = null;
             globalVariable.currentPages++;
+            if(globalVariable.currentPages == globalVariable.maxPages)
+            {
+                Destroy(door);
+            }
         }
     }
 
